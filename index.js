@@ -10,17 +10,17 @@ require('dotenv').config();
 app.use(cors());
 app.use(express.json());
 
-// app.use(function (req, res, next) {
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-//   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
-//   next();
-// });
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+  next();
+});
 
-express()
-.use(express.static(path.join(__dirname, 'public')))
-.set('views', path.join(__dirname, 'views'))
-.set('view engine', 'ejs')
+// express()
+// .use(express.static(path.join(__dirname, 'public')))
+// .set('views', path.join(__dirname, 'views'))
+// .set('view engine', 'ejs')
 //   .get('/', (req, res) => res.render('pages/index'))
 //   .get('/db', async (req, res) => {
 //     try {
@@ -37,8 +37,8 @@ express()
 //   .get('/cool', (req, res) => res.send(cool()))
 //   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
-  app.get('/', (request, response) => {
-    response.send(request.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+  app.get('/', (req, res) => {
+    res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
   });
   
   // User API
