@@ -42,6 +42,18 @@ express()
       res.send("Error " + err);
     }
   })
+  .get('/user', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM Users ORDER BY id ASC');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/user', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
   .get('/cool', (req, res) => res.send(cool()))
   .listen(port, () => console.log(`Listening on ${ port }`));
 
