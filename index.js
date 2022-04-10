@@ -1,21 +1,21 @@
 const cool = require('cool-ascii-faces');
 const express = require('express');
 const app = express();
-const cors = require("cors");
-const path = require('path');
+// const cors = require("cors");
+// const path = require('path');
 const database = require('./database.js')
 const port = process.env.PORT || 5000;
 require('dotenv').config();
 
-app.use(cors());
-app.use(express.json());
+// app.use(cors());
+// app.use(express.json());
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
+//   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+//   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers');
+//   next();
+// });
 
 // express()
 // .use(express.static(path.join(__dirname, 'public')))
