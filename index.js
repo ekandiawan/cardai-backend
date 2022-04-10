@@ -1,10 +1,11 @@
 const cool = require('cool-ascii-faces');
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: "postgres://ejrtdccrlpbnbe:ca7b51fbc6b932c2c814505edff0ae856b559916c1e02c15f9a70b940af8ea9c@ec2-52-73-149-159.compute-1.amazonaws.com:5432/ddt6o9nfhqbotb",
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
