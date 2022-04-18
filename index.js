@@ -45,7 +45,7 @@ express()
   .get('/user', async (req, res) => {
     try {
       const client = await pool.connect();
-      const result = await client.query('SELECT * FROM Public."Users" ORDER BY id ASC');
+      const result = await client.query('SELECT * FROM Users ORDER BY id ASC');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/user', results );
       client.release();
