@@ -11,15 +11,13 @@ require('dotenv').config();
 // app.use(cors());
 // app.use(express.json());
 
-/*
 const { Pool } = require('pg');
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.HEROKU_DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 });
-*/
 
 // app.use(function (req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
