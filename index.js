@@ -1,15 +1,17 @@
-const cool = require('cool-ascii-faces');
+// const cool = require('cool-ascii-faces');
 const express = require('express');
 // const app = express();
 // const cors = require("cors");
 const path = require('path');
 // const database = require('./database.js')
 const port = process.env.PORT || 5000;
+const db = require('./database.js')
 require('dotenv').config();
 
 // app.use(cors());
 // app.use(express.json());
 
+/*
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -17,6 +19,7 @@ const pool = new Pool({
     rejectUnauthorized: false
   }
 });
+*/
 
 // app.use(function (req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
@@ -54,6 +57,7 @@ express()
       res.send("Error " + err);
     }
   })
+  .get('/userdb', db.getUsers)
   .get('/cool', (req, res) => res.send(cool()))
   .listen(port, () => console.log(`Listening on ${ port }`));
 
