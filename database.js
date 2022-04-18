@@ -9,7 +9,16 @@ const pool = new Pool({
   }
 });
 
-// User query - all tested and worked (15 Mar)
+const getUsers = (request, response) => {
+  pool.query("SELECT * FROM Users ORDER BY id ASC", (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+/* User query - all tested and worked (15 Mar)
 const getUsers = () => {
   return new Promise(function(resolve, reject) {
     pool.query('SELECT * FROM public."Users" ORDER BY id ASC', (error, results) => {
@@ -105,15 +114,16 @@ const getMerchantLocation = (query) => {
     })
   }) 
 }
+*/
 
 module.exports = {
   pool,
-  getUsers,
-  createUser,
-  updateUser,
-  deleteUser,
-  getUserCards,
-  createUserCard,
-  deleteUserCard,
-  getMerchantLocation
+  getUsers
+  // createUser,
+  // updateUser,
+  // deleteUser,
+  // getUserCards,
+  // createUserCard,
+  // deleteUserCard,
+  // getMerchantLocation
 };
