@@ -1,13 +1,22 @@
+require('dotenv').config()
 const { Pool } = require('pg');
-const dotenv = require('dotenv');
-dotenv.config()
+const isProduction = process.env.NODE_ENV === 'production'
 
+const connectionString = process.env.HEROKU_DATABASE_URL;
+
+const pool = new Pool({
+  connectionString: isProduction ? process.env.HEROKU_DATABASE_URL : connectionString,
+  ssl: isProduction,
+})
+
+/*
 const pool = new Pool({
   connectionString: process.env.HEROKU_DATABASE_URL + "sslmode=require",
   ssl: {
     rejectUnauthorized: false
   }
 });
+
 
 const getUsers = (request, response) => {
   pool.query(`SELECT * FROM public."Users" ORDER BY id ASC`, (error, results) => {
@@ -17,6 +26,7 @@ const getUsers = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
+*/
 
 /* User query - all tested and worked (15 Mar)
 const getUsers = () => {
@@ -118,7 +128,7 @@ const getMerchantLocation = (query) => {
 
 module.exports = {
   pool,
-  getUsers
+  // getUsers,
   // createUser,
   // updateUser,
   // deleteUser,

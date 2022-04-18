@@ -1,16 +1,22 @@
 // const cool = require('cool-ascii-faces');
 const express = require('express');
-// const app = express();
-// const cors = require("cors");
+const bodyParser = require('body-parser')
+const app = express();
+const cors = require('cors');
 const path = require('path');
 // const database = require('./database.js')
 const port = process.env.PORT || 5000;
-const db = require('./database.js')
+const { pool } = require('./database')
 require('dotenv').config();
 
 // app.use(cors());
 // app.use(express.json());
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+
+/*
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.HEROKU_DATABASE_URL,
@@ -18,6 +24,7 @@ const pool = new Pool({
     rejectUnauthorized: false
   }
 });
+*/
 
 // app.use(function (req, res, next) {
 //   res.setHeader('Access-Control-Allow-Origin', 'https://calm-lowlands-56636.herokuapp.com/');
@@ -26,6 +33,24 @@ const pool = new Pool({
 //   next();
 // });
 
+const getUsers = (request, response) => {
+  pool.query('SELECT * FROM test_table', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+app
+  .route('/user')
+  .get(getUsers)
+
+app.listen(process.env.PORT || 5000, () => {
+  console.log(`Server listening`)
+})
+
+/*
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -136,4 +161,4 @@ express()
 
 // app.listen(port, () => {
 //     console.log(`server has started on port ${port}.`)
-// });
+// }); */
