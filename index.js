@@ -1,5 +1,6 @@
 const cool = require('cool-ascii-faces');
 const express = require('express');
+<<<<<<< HEAD
 const bodyParser = require('body-parser')
 const app = express();
 // const cors = require('cors');
@@ -49,12 +50,17 @@ const pool = new Pool({
 // app.listen(process.env.PORT || 5000, () => {
 //   console.log(`Server listening`)
 // })
+=======
+const path = require('path');
+const PORT = process.env.PORT || 5000;
+>>>>>>> 598837697b8b256a6e7540a30bfd0d33fa01181e
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
+<<<<<<< HEAD
   .get('/db', async (req, res) => {
     try {
       const client = await db.connect();
@@ -161,3 +167,7 @@ express()
 // app.listen(port, () => {
 //     console.log(`server has started on port ${port}.`)
 // });
+=======
+  .get('/cool', (req, res) => res.send(cool()))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+>>>>>>> 598837697b8b256a6e7540a30bfd0d33fa01181e
