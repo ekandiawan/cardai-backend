@@ -1,20 +1,20 @@
-// const cool = require('cool-ascii-faces');
+const cool = require('cool-ascii-faces');
 const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
-const cors = require('cors');
+// const cors = require('cors');
 const path = require('path');
-// const database = require('./database.js')
+const db = require('./database')
 const port = process.env.PORT || 5000;
-const { pool } = require('./database')
+//const { pool } = require('./database')
 require('dotenv').config();
 
 // app.use(cors());
 // app.use(express.json());
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(cors())
 
 /*
 const { Pool } = require('pg');
@@ -33,24 +33,23 @@ const pool = new Pool({
 //   next();
 // });
 
-const getUsers = (request, response) => {
-  pool.query('SELECT * FROM test_table', (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
+// const getUsers = (request, response) => {
+//   pool.query('SELECT * FROM test_table', (error, results) => {
+//     if (error) {
+//       throw error
+//     }
+//     response.status(200).json(results.rows)
+//   })
+// }
 
-app
-  .route('/user')
-  .get(getUsers)
+// app
+//   .route('/user')
+//   .get(getUsers)
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Server listening`)
-})
+// app.listen(process.env.PORT || 5000, () => {
+//   console.log(`Server listening`)
+// })
 
-/*
 express()
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
@@ -58,7 +57,7 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/db', async (req, res) => {
     try {
-      const client = await pool.connect();
+      const client = await db.connect();
       const result = await client.query('SELECT * FROM test_table');
       const results = { 'results': (result) ? result.rows : null};
       res.render('pages/db', results );
@@ -161,4 +160,4 @@ express()
 
 // app.listen(port, () => {
 //     console.log(`server has started on port ${port}.`)
-// }); */
+// });

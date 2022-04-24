@@ -8,7 +8,7 @@ const pool = new Pool({
   }
 });
 
-/*
+
 const getUsers = (request, response) => {
   pool.query(`SELECT * FROM public."Users" ORDER BY id ASC`, (error, results) => {
     if (error) {
@@ -17,7 +17,6 @@ const getUsers = (request, response) => {
     response.status(200).json(results.rows);
   });
 };
-*/
 
 /* User query - all tested and worked (15 Mar)
 const getUsers = () => {
@@ -118,8 +117,8 @@ const getMerchantLocation = (query) => {
 */
 
 module.exports = {
-  pool,
-  // getUsers,
+  //pool,
+  getUsers
   // createUser,
   // updateUser,
   // deleteUser,
